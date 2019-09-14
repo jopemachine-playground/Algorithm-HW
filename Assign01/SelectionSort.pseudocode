@@ -1,0 +1,10 @@
+# Selection Sort
+
+for i = 0 to A.length
+	index = i
+	
+	for j = i + 1 to A.length
+		if A[index] > A[j]
+			index = j
+			
+	swap(A[i], A[index])
