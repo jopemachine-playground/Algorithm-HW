@@ -10,3 +10,4 @@
 
 ### Code
 
+* Assign 01 - Insertion Sort, Merge Sort, Practice 2.2-2, 2.3-6
