@@ -26,7 +26,6 @@ def fibonacci_recursive(n):
 
 def fibonacci_bottomup2(n):
 
-    print('-' * 80)
     prev1 = 0
     prev2 = 1
 
@@ -42,7 +41,6 @@ def fibonacci_squaring(n):
     ret = matrix
     start = timeit.default_timer()
 
-    print('-' * 80)
     for i in range(1, n):
         ret = MultiplyMatrix(ret, matrix)
     return ret[1][0]
@@ -62,8 +60,3 @@ def MultiplyMatrix(Matrix_A, Matrix_B):
 
 if __name__ == "__main__":
     pass
-    # print(fibonacci_recursive(5))
-    # print(fibonacci_bottomup1(5))
-    # print(fibonacci_bottomup2(90))
-    # print(fibonacci_squaring(90))
-    # print(MultiplyMatrix([[1, 1], [1, 0]], [[1, 1], [1, 0]]))

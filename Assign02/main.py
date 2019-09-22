@@ -12,30 +12,30 @@ if __name__ == "__main__":
     inp = int(input())
     start = timeit.default_timer()
 
-    # if   (method == 1):
-    print('*** Method 1 ***')
-    for i in range(0, inp):
-        if i % 10 == 0:
-            print('-' * 80)
-        ret = fibonacci_recursive(i)
-        result = "%40s" % ("%d %0.10f" % (ret, timeit.default_timer() - start))
-        print('f<%2s> = %s' % (i, result))
+    if   (method == 1):
+        print('*** Method 1 ***')
+        for i in range(0, inp + 1):
+            if i % 10 == 0:
+                print('-' * 80)
+            ret = fibonacci_recursive(i)
+            result = "%40s" % ("%d %0.10f" % (ret, timeit.default_timer() - start))
+            print('f<%2s> = %s' % (i, result))
 
-# elif (method == 2):
-    print('*** Method 2 ***')
-    for i in range(0, inp):
-        if i % 10 == 0:
-            print('-' * 80)
-        ret = fibonacci_bottomup2(i)
-        result = "%40s" % ("%d %0.10f" % (ret, timeit.default_timer() - start))
-        print('f<%2s> = %s' % (i, result))
+    elif (method == 2):
+        print('*** Method 2 ***')
+        for i in range(0, inp + 1):
+            if i % 10 == 0:
+                print('-' * 80)
+            ret = fibonacci_bottomup2(i)
+            result = "%40s" % ("%d %0.10f" % (ret, timeit.default_timer() - start))
+            print('f<%2s> = %s' % (i, result))
 
-# elif (method == 3):
-    print('*** Method 3 ***')
-    for i in range(0, inp):
-        if i % 10 == 0:
-            print('-' * 80)
-        ret = fibonacci_squaring(i)
-        result = "%40s" % ("%d %0.10f" % (ret, timeit.default_timer() - start))
-        print('f<%2s> = %s' % (i, result))
+    elif (method == 3):
+        print('*** Method 3 ***')
+        for i in range(0, inp + 1):
+            if i % 10 == 0:
+                print('-' * 80)
+            ret = fibonacci_squaring(i)
+            result = "%40s" % ("%d %0.10f" % (ret, timeit.default_timer() - start))
+            print('f<%2s> = %s' % (i, result))
 
