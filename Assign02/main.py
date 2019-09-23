@@ -1,3 +1,4 @@
+import timeit
 from Assign02.fibonacchi import *
 
 if __name__ == "__main__":
@@ -26,7 +27,7 @@ if __name__ == "__main__":
         for i in range(0, inp + 1):
             if i % 10 == 0:
                 print('-' * 80)
-            ret = fibonacci_bottomup2(i)
+            ret = fibonacci_bottomup(i)
             result = "%40s" % ("%d %0.10f" % (ret, timeit.default_timer() - start))
             print('f<%2s> = %s' % (i, result))
 

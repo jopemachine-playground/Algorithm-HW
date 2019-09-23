@@ -1,5 +1,3 @@
-import timeit
-
 def fibonacci_recursive(n):
     if n == 0:
         return 0
@@ -8,24 +6,8 @@ def fibonacci_recursive(n):
 
     return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
 
-# def fibonacci_bottomup1(n):
-#     cache = [None] * (n+1)
-#
-#     print("-------------------------------------------------------")
-#     cache[0] = 0
-#     cache[1] = 1
-#     print("f< 0>" + cache[0])
-#     print("f< 1>" + cache[1])
-#
-#     for i in range(2, n + 1, 1):
-#         if i % 10 == 0:
-#             print("-------------------------------------------------------")
-#         cache[i] = cache[i-1] + cache[i-2]
-#         print("f< " + str(i) + ">" + cache[i])
-#     return cache[n]
-
-def fibonacci_bottomup2(n):
-
+def fibonacci_bottomup(n):
+    if n == 0: return 0
     prev1 = 0
     prev2 = 1
 
@@ -37,14 +19,28 @@ def fibonacci_bottomup2(n):
     return prev2
 
 def fibonacci_squaring(n):
+    if n < 2:
+        return n
+
     matrix = [[1, 1], [1, 0]]
-    ret = matrix
-    start = timeit.default_timer()
 
-    for i in range(1, n):
-        ret = MultiplyMatrix(ret, matrix)
-    return ret[1][0]
+    POW.cache = dict()
+    return POW(matrix, n)[1][0]
 
+def POW(A, n):
+    if n == 1:
+        return A
+
+    # Apply DP
+    if n in POW.cache:
+        return POW.cache[n]
+
+    if n % 2 == 0:
+        POW.cache[n] = MultiplyMatrix(POW(A, n/2), POW(A, n/2))
+    else:
+        POW.cache[n] = MultiplyMatrix(MultiplyMatrix(POW(A, (n-1)/2), POW(A, (n-1)/2)), A)
+
+    return POW.cache[n]
 
 # assume Matrix A and B are same size
 def MultiplyMatrix(Matrix_A, Matrix_B):
