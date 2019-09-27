@@ -11,6 +11,7 @@ def sort_and_count(_list):
     r     = rA + rB + r
     return (r, L)
 
+
 def merge_and_count(A, B):
 
     inversion_count = 0
@@ -46,5 +47,13 @@ def merge_and_count(A, B):
 
     return (inversion_count, L)
 
+
 if __name__ == "__main__":
-    pass
+    try:
+        fr = open(source_data_inversion, 'r')
+        inputStr = fr.readline();
+        inputArr = list(map(int, inputStr.split(',')))
+        count, res = sort_and_count(inputArr)
+        print(count)
+    except FileNotFoundError:
+        print ("test File Not Found!")

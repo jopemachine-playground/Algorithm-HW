@@ -48,16 +48,14 @@ def dist(pointA, pointB):
 
 
 if __name__ == "__main__":
-    try:
-        fr = open(source_data_closest, 'r')
-        array_list = []
-        while True:
-            inputStr = fr.readline()
-            if not inputStr:
-                break
-            elem = list(map(float, inputStr.split(',')))
-            array_list.append(elem)
-        print(closest_pair(array_list))
 
-    except FileNotFoundError:
-        print ("test File Not Found!")
+    n = int(input())
+    array_list = []
+
+    for i in range(0, n):
+        inputStr = input()
+        elem = list(map(int, inputStr.split(' ')))
+        array_list.append(elem)
+
+    print((int)(closest_pair(array_list) ** 2))
+
