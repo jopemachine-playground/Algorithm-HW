@@ -49,6 +49,9 @@ def merge_and_count(A, B):
 
 
 if __name__ == "__main__":
+
+    source_data_inversion       = "data03/data03_inversion.txt"
+
     try:
         fr = open(source_data_inversion, 'r')
         inputStr = fr.readline();

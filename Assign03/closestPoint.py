@@ -48,6 +48,9 @@ def dist(pointA, pointB):
 
 
 if __name__ == "__main__":
+
+    source_data_closest         = "data03/data03_closest.txt"
+
     try:
         fr = open(source_data_closest, 'r')
         array_list = []
