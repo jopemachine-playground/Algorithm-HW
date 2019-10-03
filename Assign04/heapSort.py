@@ -1,5 +1,5 @@
 class PriorityQueue:
-    # -------------------------------------------------------------------------------
+    # ----------------------------------------------------------------------------------------------------------------
     # Public Method
     class Node:
         # Node는 PQ의 노드 중첩 클래스
@@ -17,20 +17,20 @@ class PriorityQueue:
     def delete(self, item):
         for i in range(0, self.__count):
             if self.__arr[i].item == item:
-                temp = self._arr
+                temp = self.__arr
                 for j in range(i, self.__count - 1):
                     self.__arr[j] = temp[j + 1]
                 return
 
     def enqueue(self, item, priority):
         # insert (S, x)
-        self.__arr[self.__count] = self.Node(priority, item)
+        self.__arr.append(self.Node(int(priority), item))
         index = self.__count
 
         while index > 0:
             parent_index = self.__get_parent_index(index)
-            if self.__arr[index].priority > self.arr[parent_index].priority:
-                self.__arr[index], self.__arr[parent_index] = self.arr[parent_index], self.__arr[index]
+            if self.__arr[index].priority > self.__arr[parent_index].priority:
+                self.__arr[index], self.__arr[parent_index] = self.__arr[parent_index], self.__arr[index]
                 index = parent_index
             else:
                 break
@@ -40,8 +40,13 @@ class PriorityQueue:
         # increase_key(S, x, k)
         for i in range(0, self.__count):
             if self.__arr[i].item == item:
-                self.__arr[i].priority = priority
-                return
+                self.__arr[i].priority = int(priority)
+                break
+
+        for i in range(int(self.__count / 2), 0, -1):
+            # max_heapify는 root 노드 인덱스를 1이라고 가정하지만,
+            # 배열의 시작 인덱스는 0임. 따라서, 1을 빼 준다.
+            self.__max_heapify(i-1)
 
     def is_empty(self):
         return self.count == 0
@@ -57,7 +62,8 @@ class PriorityQueue:
         # max (S)
         return self.__arr[0].item
 
-    # -------------------------------------------------------------------------------
+    # ----------------------------------------------------------------------------------------------------------------
+
     # Private Method
 
     def __init__(self):
@@ -91,8 +97,8 @@ class PriorityQueue:
 
     def __deque_recursive(self, index):
 
-        left_child_index = index * 2
-        right_child_index = index * 2 + 1
+        left_child_index = index * 2 + 1
+        right_child_index = index * 2 + 2
 
         if left_child_index > self.__count:
             return
@@ -116,6 +122,7 @@ class PriorityQueue:
             return child_index / 2
 
 
+# ----------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     source_data = "data04.txt"
     records = []
@@ -131,7 +138,7 @@ if __name__ == "__main__":
             records.append(PriorityQueue.Node(score, text))
 
     except FileNotFoundError:
-        print ("test File Not Found!")
+        print("test File Not Found!")
 
     pq = PriorityQueue(records)
 
@@ -141,12 +148,49 @@ if __name__ == "__main__":
 
         pq.print()
         print()
-        print("-" * 60)
+        print("-" * 75)
 
         print("1. 작업 추가  2. 최대값  3. 최대 우선순위 작업 처리")
         print("4. 원소 키값 증가  5. 작업 제거  6. 종료")
-        print("-" * 60)
+        print("-" * 75)
 
         command = input()
+
+        if command == "1":
+            print("추가할 작업의 우선순위를 입력해주세요")
+            prio = input()
+            print("추가할 작업의 이름을 입력해주세요")
+            work = input()
+            pq.enqueue(work, prio)
+            print("-" * 75)
+
+        elif command == "2":
+            print("가장 높은 우선순위를 갖는 항목은 " + pq.retrieve() + " 입니다")
+            print("-" * 75)
+
+        elif command == "3":
+            print("가장 높은 우선순위의 작업을 처리했습니다")
+            pq.dequeue()
+            print("-" * 75)
+
+        elif command == "4":
+            print("증가시킬 항목의 이름을 입력해주세요")
+            work = input()
+            print("증가시킬 키 값을 입력해주세요 (감소는 불가)")
+            prio = input()
+            pq.increase_priority(work, prio)
+            print("-" * 75)
+
+        elif command == "5":
+            print("제거할 항목의 이름을 입력하세요")
+            work = input()
+            pq.delete(work)
+            print("-" * 75)
+
+        elif command == "6":
+            print("프로그램을 종료합니다")
+            break
+
+
 
 
