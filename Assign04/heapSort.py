@@ -9,9 +9,8 @@ class PriorityQueue:
 
     def dequeue(self):
         # extract_max (S)
-        target = self.__arr[0].item
-        self.__deque_recursive(0)
-        self.__count -= 1
+        target = self.__arr[0]
+        self.delete(target.item)
         return target
 
     def delete(self, item):
@@ -20,21 +19,25 @@ class PriorityQueue:
                 temp = self.__arr
                 for j in range(i, self.__count - 1):
                     self.__arr[j] = temp[j + 1]
-                return
+
+        self.__count -= 1
+        self.__arr.pop()
+
+        for i in range(int(len(self.__arr) / 2), 0, -1):
+            # max_heapify는 root 노드 인덱스를 1이라고 가정하지만,
+            # 배열의 시작 인덱스는 0임. 따라서, 1을 빼 준다.
+            self.__max_heapify(i-1)
+        return
 
     def enqueue(self, item, priority):
         # insert (S, x)
         self.__arr.append(self.Node(int(priority), item))
-        index = self.__count
-
-        while index > 0:
-            parent_index = self.__get_parent_index(index)
-            if self.__arr[index].priority > self.__arr[parent_index].priority:
-                self.__arr[index], self.__arr[parent_index] = self.__arr[parent_index], self.__arr[index]
-                index = parent_index
-            else:
-                break
         self.__count += 1
+
+        for i in range(int(self.__count / 2), 0, -1):
+            # max_heapify는 root 노드 인덱스를 1이라고 가정하지만,
+            # 배열의 시작 인덱스는 0임. 따라서, 1을 빼 준다.
+            self.__max_heapify(i-1)
 
     def increase_priority(self, item, priority):
         # increase_key(S, x, k)
@@ -83,33 +86,17 @@ class PriorityQueue:
         left_child_index = index * 2 + 1
         right_child_index = index * 2 + 2
 
-        if left_child_index <= self.__count and self.__arr[left_child_index].priority > self.__arr[index].priority:
+        if left_child_index < self.__count and self.__arr[left_child_index].priority > self.__arr[index].priority:
             largest = left_child_index
         else:
             largest = index
 
-        if right_child_index <= self.__count and self.__arr[right_child_index].priority > self.__arr[largest].priority:
+        if right_child_index < self.__count and self.__arr[right_child_index].priority > self.__arr[largest].priority:
             largest = right_child_index
 
         if largest != index:
             self.__arr[index], self.__arr[largest] = self.__arr[largest],  self.__arr[index]
             self.__max_heapify(largest)
-
-    def __deque_recursive(self, index):
-
-        left_child_index = index * 2 + 1
-        right_child_index = index * 2 + 2
-
-        if left_child_index > self.__count:
-            return
-
-        if self.__arr[left_child_index].priority < self.__arr[right_child_index].priority:
-            self.__arr[right_child_index], self.__arr[index] = self.__arr[index], self.__arr[right_child_index]
-            self.__deque_recursive(right_child_index);
-
-        elif self.__arr[left_child_index].priority > self.__arr[right_child_index].priority:
-            self.__arr[left_child_index], self.__arr[index] = self.__arr[index], self.__arr[left_child_index]
-            self.__deque_recursive(left_child_index);
 
     @staticmethod
     def __get_parent_index(child_index):
