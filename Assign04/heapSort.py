@@ -156,8 +156,8 @@ if __name__ == "__main__":
             print("-" * 75)
 
         elif command == "3":
-            print("가장 높은 우선순위의 작업을 처리했습니다")
-            pq.dequeue()
+            task = pq.dequeue()
+            print("가장 높은 우선순위의 작업을 처리했습니다. 처리된 작업은 " + task.item + " 입니다")
             print("-" * 75)
 
         elif command == "4":

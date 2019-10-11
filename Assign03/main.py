@@ -12,7 +12,7 @@ if __name__ == "__main__":
         count, res = sort_and_count(inputArr)
         print(count)
     except FileNotFoundError:
-        print ("test File Not Found!")
+        print("test File Not Found!")
 
     try:
         fr = open(source_data_closest, 'r')
@@ -26,7 +26,7 @@ if __name__ == "__main__":
         print(closest_pair(array_list))
 
     except FileNotFoundError:
-        print ("test File Not Found!")
+        print("test File Not Found!")
 
     # test_insertionSort(source_data, insertion_sort_dest_data)
     # test_mergeSort(source_data, merge_sort_dest_data)

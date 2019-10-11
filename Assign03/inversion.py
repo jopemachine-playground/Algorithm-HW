@@ -59,4 +59,4 @@ if __name__ == "__main__":
         count, res = sort_and_count(inputArr)
         print(count)
     except FileNotFoundError:
-        print ("test File Not Found!")
+        print("test File Not Found!")
