@@ -1,3 +1,4 @@
+import timeit
 from random import *
 
 
@@ -11,8 +12,8 @@ def quick_sort(A, p, r):
 def quick_sort_with_random(A, p, r):
     if p < r:
         q = randomized_partition(A, p, r)
-        quick_sort(A, p, q-1)
-        quick_sort(A, q+1, r)
+        quick_sort_with_random(A, p, q-1)
+        quick_sort_with_random(A, q+1, r)
 
 
 def partition(A, p, r):
@@ -44,8 +45,13 @@ if __name__ == "__main__":
         inputArr1 = list(map(int, inputStr.split(',')))
         inputArr2 = list(map(int, inputStr.split(',')))
 
+        start = timeit.default_timer()
         quick_sort(inputArr1, 0, len(inputArr1) - 1)
+        print(timeit.default_timer() - start)
+
+        start = timeit.default_timer()
         quick_sort_with_random(inputArr2, 0, len(inputArr2) - 1)
+        print(timeit.default_timer() - start)
 
         fw      = open(dest_data, 'w')
         fw_rand = open(dest_randomized_data, 'w')

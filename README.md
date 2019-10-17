@@ -15,4 +15,5 @@
 * Assign 03 - Counting Inversions, Closest Pair of Points
 * Assign 04 - Heap Sort, Prioirity Queue
 * Assign 05 - Quick Sort
+* Assign 06 - Find a Middle Number, Binary Search and Invariant
 
