@@ -1,5 +1,20 @@
-def binary_search():
-    pass
+def binary_search(arr, start, end, target):
+
+    while end >= start:
+
+        middle_index = (start + end) / 2
+
+        middle = arr[int(middle_index)]
+
+        if middle == target:
+            return True
+
+        if target > middle:
+            start = middle_index + 1
+        elif target < middle:
+            end = middle_index - 1
+
+    return False
 
 
 def binary_search_recursive(arr, start, end, target):
