@@ -17,3 +17,4 @@
 * Assign 05 - Quick Sort
 * Assign 06 - Find a Middle Number, Binary Search and Invariant
 
+* Assign 07 - Segmented Least Squares
