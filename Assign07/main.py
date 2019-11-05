@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def least_square_method(Xs: object, Ys: object) -> object:
+def least_square_method(Xs, Ys):
 
     Xs_arr = np.zeros((len(Xs), 2))
     for i in range(0, len(Xs)):
@@ -12,20 +12,16 @@ def least_square_method(Xs: object, Ys: object) -> object:
     for i in range(0, len(Ys)):
         Ys_arr[i][0] = Ys[i]
 
-    ATA    = np.matmul(np.transpose(Xs_arr), Xs_arr)
-
     # 역행렬이 존재하지 않는 경우도 처리하기 위해 Pseudo Inverse를 이용한다.
-    ATAI   = np.linalg.pinv(ATA)
-    ATAIAT = np.matmul(ATAI, np.transpose(Xs_arr))
 
-    return np.matmul(ATAIAT, Ys_arr)
+    return np.matmul(np.matmul(np.linalg.pinv(np.matmul(np.transpose(Xs_arr), Xs_arr)), np.transpose(Xs_arr)), Ys_arr)
 
 
 def segmented_least_squares(Xs, Ys, pointCnt, C):
 
     err = np.zeros((pointCnt, pointCnt))
     opt = np.zeros(pointCnt + 1)
-    slicePoint = [()] * (pointCnt + 1)
+    dividingPtAtJ = [()] * (pointCnt + 1)
 
     a_l_l = list(list())
     b_l_l = list(list())
@@ -48,33 +44,31 @@ def segmented_least_squares(Xs, Ys, pointCnt, C):
         b_l_l.append(b_l)
 
     for j in range(1, pointCnt + 1):
+        opt[j], x = min((err[i, j - 1] + C + opt[i], i) for i in range(j))
+        dividingPtAtJ[j] = dividingPtAtJ[x] + (x,)
 
-        opt[j], minP = min((err[i, j - 1] + C + opt[i], i) for i in range(j))
-
-        slicePoint[j] = slicePoint[minP] + (minP,)
-
-    final = slicePoint[-1] + (pointCnt,)
+    dividingPts = dividingPtAtJ[-1] + (pointCnt,)
 
     print("Cost of the optimal solution : " + str(opt[-1]))
     print()
     print("An optimal solution : ")
 
     for i in range(0, pointCnt - 1):
-        if i not in final:
+        if i not in dividingPts:
             continue
 
-        ind = final.index(i)
+        ind = dividingPts.index(i)
 
         print("[Segment " +
               str(i) +
               " - " +
-              str(final[ind + 1]) +
+              str(dividingPts[ind + 1]) +
               " : " + " y = " +
-              str(a_l_l[final[ind + 1] - 1][i]) +
+              str(a_l_l[dividingPts[ind + 1] - 1][i][0]) +
               " * x + " +
-              str(b_l_l[final[ind + 1] - 1][i]) +
-              "// square error: " +
-              str(err[i][final[ind + 1] - 1]))
+              str(b_l_l[dividingPts[ind + 1] - 1][i][0]) +
+              " // square error: " +
+              str(err[i][dividingPts[ind + 1] - 1]))
 
 
 if __name__ == "__main__":
@@ -93,7 +87,7 @@ if __name__ == "__main__":
         allPoint = inputArr[1:len(inputArr) - 1]
         Xs = allPoint[0::2]
         Ys = allPoint[1::2]
-        segmented_least_squares(Xs, Ys, len(Xs), costValue)
+        segmented_least_squares(Xs, Ys, int(pointCnt), costValue)
 
     except FileNotFoundError:
         print("test File Not Found!")
