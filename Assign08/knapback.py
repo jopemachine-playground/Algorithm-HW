@@ -43,6 +43,15 @@ def pack_2(allItems, capacity, index):
     return pack_2.opt[index][capacity]
 
 
+def analysis(opt):
+    ans = list()
+    for i in range(0, item_cnt):
+        for j in range(0, int(bag_size) + 1):
+            if opt[i][j] == maxValue:
+                ans.append(i)
+    print(ans)
+
+
 if __name__ == "__main__":
 
     source_data = "data09_knapsack.txt"
@@ -80,12 +89,7 @@ if __name__ == "__main__":
         print("max : " + str(maxValue))
 
         # 주어진 문제에서 고른 item 들을 찾아 출력
-        ans = list()
-        for i in range(0, item_cnt):
-            for j in range(0, int(bag_size) + 1):
-                if pack_2.opt[i][j] == maxValue:
-                    ans.append(i)
-        print(ans)
+        analysis(pack_2.opt)
 
     except FileNotFoundError:
         print("test File Not Found!")
