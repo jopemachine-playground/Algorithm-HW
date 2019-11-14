@@ -4,9 +4,9 @@
 
 ### Environment
 
->Pycharm 2019.02
+> Pycharm 2019.02
 >
->Python 3.7.4
+> Python 3.7.4
 
 ### Code
 
@@ -17,4 +17,5 @@
 * Assign 05 - Quick Sort
 * Assign 06 - Find a Middle Number, Binary Search and Invariant
 * Assign 07 - Segmented Least Squares
-* Assign 08 - Knapsack & Sequence 
+* Assign 08 - Knapsack & Sequence
+* Assign 09 - Bellman-Ford & Matrix chain multiplication 
