@@ -15,7 +15,8 @@ if __name__ == "__main__":
 
         # pointCnt를 통한 이차원 배열 생성
 
-        arr = [[None] * pointCnt for i in pointCnt]
+        arr = [[float("inf")] * pointCnt for i in range(0, pointCnt)]
+        dp = [float("inf")] * pointCnt
 
         while True:
             line = fr.readline()
@@ -24,11 +25,32 @@ if __name__ == "__main__":
 
             onelineList = line.split(",")
 
-            start = onelineList[0]
-            end = onelineList[1]
-            weight = onelineList[2]
+            start = int(onelineList[0])
+            end = int(onelineList[1])
+            weight = int(onelineList[2])
 
             arr[start][end] = weight
 
+        dp[0] = 0
+
+        hasMinusCycle = False
+
+        for i in range(0, pointCnt):
+            print("-" * 10 + "iteration " + str(i) + "-" * 10)
+
+            for u in range(0, pointCnt):
+                for v in range(0, pointCnt):
+                    if u != v and arr[u][v] != float("inf"):
+                        if dp[v] > dp[u] + arr[u][v]:
+                            print("Update distance of " + str(v) + " from " + str(dp[v]) + " to " + str(dp[u] + arr[u][v]))
+                            dp[v] = dp[u] + arr[u][v]
+                            if i == pointCnt - 1:
+                                hasMinusCycle = True
+
+            print("iteration " + str(i) + " distance : " + str(dp))
+
     except FileNotFoundError:
         print("test File Not Found!")
+
+    if hasMinusCycle:
+        print("The graph has nagative cycle")
