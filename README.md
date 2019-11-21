@@ -19,3 +19,4 @@
 * Assign 07 - Segmented Least Squares
 * Assign 08 - Knapsack & Sequence
 * Assign 09 - Bellman-Ford & Matrix chain multiplication 
+* Assign 10 - Dijkstra algorithm

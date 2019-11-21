@@ -7,7 +7,7 @@ if __name__ == "__main__":
     try:
         allItems = list()
 
-        fr = open(source_data1, 'r')
+        fr = open(source_data2, 'r')
 
         line = fr.readline()
 
