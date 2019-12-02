@@ -20,4 +20,4 @@
 * Assign 08 - Knapsack & Sequence  
 * Assign 09 - Bellman-Ford & Matrix chain multiplication  
 * Assign 10 - Dijkstra algorithm  
-* Assign 11 - Prim's Algorithm, Huffman Code, Kruskal’s algorithm  
+* Assign 11 - Prim's Algorithm, Huffman Code
